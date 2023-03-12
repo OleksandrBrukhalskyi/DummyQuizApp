@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">DummyQuizApp</string>
+    <string name="first_question">Чи є лісовалки ви українських народних пісень вигаданий?</string>
+</resources>

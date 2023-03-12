@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity"
+    android:padding="24dp"
+    >
+
+
+    <TextView
+        android:id="@+id/total_questions"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:text="Кількість питань"
+        android:textColor="@color/black"
+        android:textSize="14sp"
+        android:layout_centerHorizontal="true"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/question"
+        android:layout_width="381dp"
+        android:layout_height="151dp"
+        android:layout_above="@id/choices_layout"
+        android:layout_marginBottom="-24dp"
+        android:text="Question"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:textSize="24dp">
+
+    </TextView>
+
+    <LinearLayout
+        android:id="@+id/choices_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginTop="34dp"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/ans_a_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:text="A" />
+
+        <Button
+            android:id="@+id/ans_b_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:text="B" />
+
+        <Button
+            android:id="@+id/ans_c_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:text="C" />
+
+        <Button
+            android:id="@+id/ans_d_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:text="D" />
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/submit_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/choices_layout"
+        android:layout_margin="80dp"
+        android:layout_marginTop="170dp"
+        android:text="Надіслати">
+
+    </Button>
+
+
+</RelativeLayout>
