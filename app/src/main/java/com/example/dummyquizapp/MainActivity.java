@@ -7,6 +7,8 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -16,7 +18,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     TextView totalQuestionsTextView;
     TextView questionTextView;
-    Button ansA, ansB, ansC, ansD;
+    RadioButton ansA, ansB, ansC, ansD;
     Button submitBtn;
 
     int score = 0;
@@ -31,82 +33,111 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         totalQuestionsTextView = findViewById(R.id.total_questions);
         questionTextView = findViewById(R.id.question);
-        ansA = findViewById(R.id.ans_a_btn);
-        ansB = findViewById(R.id.ans_b_btn);
-        ansC = findViewById(R.id.ans_c_btn);
-        ansD = findViewById(R.id.ans_d_btn);
+        ansA = findViewById(R.id.choice_a);
+        ansB = findViewById(R.id.choice_b);
+        ansC = findViewById(R.id.choice_c);
+        ansD = findViewById(R.id.choice_d);
 
-        submitBtn = findViewById(R.id.submit_btn);
+
 
         ansA.setOnClickListener(this);
         ansB.setOnClickListener(this);
         ansC.setOnClickListener(this);
         ansD.setOnClickListener(this);
-        submitBtn.setOnClickListener(this);
+
 
         totalQuestionsTextView.setText("Кількість питань: " + amountOfQuestions);
-        
+
         loadNextQuestion();
     }
 
-     void loadNextQuestion() {
-         if(currentQuestionIndex == amountOfQuestions ){
-             finishQuiz();
-             return;
-         }
+    void loadNextQuestion() {
+        if (currentQuestionIndex == amountOfQuestions) {
+            finishQuiz();
+            return;
+        }
         questionTextView.setText(QuestionAndAnswer.questions[currentQuestionIndex]);
         ansA.setText(QuestionAndAnswer.choices[currentQuestionIndex][0]);
         ansB.setText(QuestionAndAnswer.choices[currentQuestionIndex][1]);
         ansC.setText(QuestionAndAnswer.choices[currentQuestionIndex][2]);
         ansD.setText(QuestionAndAnswer.choices[currentQuestionIndex][3]);
     }
-    void finishQuiz(){
+
+    void finishQuiz() {
         String passStatus = "";
-        if(score > amountOfQuestions*0.60){
+        if (score > amountOfQuestions * 0.60) {
             passStatus = "Молодець";
-        }else{
+        } else {
             passStatus = "Не поталанило";
         }
 
         new AlertDialog.Builder(this)
                 .setTitle(passStatus)
-                .setMessage("Результат "+ score+" з "+ amountOfQuestions)
-                .setPositiveButton("Restart",(dialogInterface, i) -> restartQuiz() )
+                .setMessage("Результат " + score + " з " + amountOfQuestions)
+                .setPositiveButton("Restart", (dialogInterface, i) -> restartQuiz())
                 .setCancelable(false)
                 .show();
 
 
     }
 
-    void restartQuiz(){
+    void restartQuiz() {
         score = 0;
-        currentQuestionIndex =0;
+        currentQuestionIndex = 0;
         loadNextQuestion();
     }
+
     @Override
     public void onClick(View view) {
-        ansA.setBackgroundColor(Color.parseColor("#FF6200EE"));
-        ansB.setBackgroundColor(Color.parseColor("#FF6200EE"));
-        ansC.setBackgroundColor(Color.parseColor("#FF6200EE"));
-        ansD.setBackgroundColor(Color.parseColor("#FF6200EE"));
+//
 
-        Button clickedButton = (Button) view;
-        if(clickedButton.getId()==R.id.submit_btn){
-            if(selectedAnswer.equals(QuestionAndAnswer.correctAnswers[currentQuestionIndex])){
-                score++;
+        if (view.getId() == R.id.choice_a) {
+            selectedAnswer = ansA.getText().toString();
+            if (ansA.isChecked()) {
+                if (selectedAnswer.equals(QuestionAndAnswer.correctAnswers[currentQuestionIndex])) {
+                    score++;
+                }
+                currentQuestionIndex++;
+                loadNextQuestion();
+                ansA.setChecked(false);
+
             }
-            currentQuestionIndex++;
-            loadNextQuestion();
-
-
-       }
-        else{
-            //choices button clicked
-            selectedAnswer  = clickedButton.getText().toString();
-            clickedButton.setBackgroundColor(Color.MAGENTA);
-
         }
+        if (view.getId() == R.id.choice_b) {
+            selectedAnswer = ansB.getText().toString();
+            if (ansB.isChecked()) {
+                if (selectedAnswer.equals(QuestionAndAnswer.correctAnswers[currentQuestionIndex])) {
+                    score++;
+                }
+                currentQuestionIndex++;
+                loadNextQuestion();
+                ansB.setChecked(false);
 
+            }
+        }
+        if (view.getId() == R.id.choice_c) {
+            selectedAnswer = ansC.getText().toString();
+            if (ansC.isChecked()) {
+                if (selectedAnswer.equals(QuestionAndAnswer.correctAnswers[currentQuestionIndex])) {
+                    score++;
+                }
+                currentQuestionIndex++;
+                loadNextQuestion();
+                ansC.setChecked(false);
 
+            }
+        }
+        if (view.getId() == R.id.choice_d) {
+            selectedAnswer = ansD.getText().toString();
+            if (ansD.isChecked()) {
+                if (selectedAnswer.equals(QuestionAndAnswer.correctAnswers[currentQuestionIndex])) {
+                    score++;
+                }
+                currentQuestionIndex++;
+                loadNextQuestion();
+                ansD.setChecked(false);
+
+            }
+        }
     }
 }

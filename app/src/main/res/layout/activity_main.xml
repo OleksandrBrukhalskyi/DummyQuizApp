@@ -40,46 +40,43 @@
         android:layout_marginTop="34dp"
         android:orientation="vertical">
 
-        <Button
-            android:id="@+id/ans_a_btn"
+        <RadioGroup
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="5dp"
-            android:text="A" />
+            android:layout_height="wrap_content">
 
-        <Button
-            android:id="@+id/ans_b_btn"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="5dp"
-            android:text="B" />
+            <RadioButton android:id="@+id/choice_a"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:text="A"
+                android:onClick="onClick"
+                android:textAlignment="center"
+                />
+            <RadioButton android:id="@+id/choice_b"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:text="B"
+                android:onClick="onClick"
+                android:textAlignment="center"
+                />
+            <RadioButton android:id="@+id/choice_c"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:text="C"
+                android:onClick="onClick"
+                android:textAlignment="center"
+                />
+            <RadioButton android:id="@+id/choice_d"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:text="D"
+                android:onClick="onClick"
+                android:textAlignment="center"
+                />
+        </RadioGroup>
 
-        <Button
-            android:id="@+id/ans_c_btn"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="5dp"
-            android:text="C" />
-
-        <Button
-            android:id="@+id/ans_d_btn"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="5dp"
-            android:text="D" />
 
     </LinearLayout>
 
-    <Button
-        android:id="@+id/submit_btn"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/choices_layout"
-        android:layout_margin="80dp"
-        android:layout_marginTop="170dp"
-        android:text="Надіслати">
-
-    </Button>
 
 
 </RelativeLayout>
