@@ -3,6 +3,7 @@ package com.example.dummyquizapp;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
@@ -44,6 +45,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         ansD.setOnClickListener(this);
         submitBtn.setOnClickListener(this);
 
+//        Intent bundle = getIntent();
+//        String name = bundle.getStringExtra("name");
+//        System.out.println("NAME: " + name );
+
         totalQuestionsTextView.setText("Кількість питань: " + amountOfQuestions);
         
         loadNextQuestion();
@@ -53,6 +58,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
          if(currentQuestionIndex == amountOfQuestions ){
              finishQuiz();
              return;
+
+//             return;
          }
         questionTextView.setText(QuestionAndAnswer.questions[currentQuestionIndex]);
         ansA.setText(QuestionAndAnswer.choices[currentQuestionIndex][0]);
@@ -61,19 +68,30 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         ansD.setText(QuestionAndAnswer.choices[currentQuestionIndex][3]);
     }
     void finishQuiz(){
-        String passStatus = "";
-        if(score > amountOfQuestions*0.60){
-            passStatus = "Молодець";
-        }else{
-            passStatus = "Не поталанило";
-        }
 
-        new AlertDialog.Builder(this)
-                .setTitle(passStatus)
-                .setMessage("Результат "+ score+" з "+ amountOfQuestions)
-                .setPositiveButton("Restart",(dialogInterface, i) -> restartQuiz() )
-                .setCancelable(false)
-                .show();
+        Intent in = new Intent(MainActivity.this, ResultActivity.class);
+        in.putExtra("score", score);
+        in.putExtra("amountOfQuestions", amountOfQuestions);
+        in.putExtra("name", in.getStringExtra("name"));
+        Bundle bundle = getIntent().getExtras();
+        if (bundle != null) {
+            in.putExtras(bundle);
+        }
+        startActivity(in);
+
+//        String passStatus = "";
+//        if(score > amountOfQuestions*0.60){
+//            passStatus = "Молодець";
+//        }else{
+//            passStatus = "Не поталанило";
+//        }
+//
+//        new AlertDialog.Builder(this)
+//                .setTitle(passStatus)
+//                .setMessage("Результат "+ score+" з "+ amountOfQuestions)
+//                .setPositiveButton("Restart",(dialogInterface, i) -> restartQuiz() )
+//                .setCancelable(false)
+//                .show();
 
 
     }
@@ -81,6 +99,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     void restartQuiz(){
         score = 0;
         currentQuestionIndex =0;
+
         loadNextQuestion();
     }
     @Override
